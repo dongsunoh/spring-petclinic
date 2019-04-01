@@ -49,8 +49,17 @@ public class Owner extends Person {
     @Digits(fraction = 0, integer = 10)
     private String telephone;
 
+    private Integer age;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private Set<Pet> pets;
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 
     public String getAddress() {
         return this.address;
@@ -90,7 +99,7 @@ public class Owner extends Person {
     public List<Pet> getPets() {
         List<Pet> sortedPets = new ArrayList<>(getPetsInternal());
         PropertyComparator.sort(sortedPets,
-                new MutableSortDefinition("name", true, true));
+            new MutableSortDefinition("name", true, true));
         return Collections.unmodifiableList(sortedPets);
     }
 
@@ -135,9 +144,10 @@ public class Owner extends Person {
     public String toString() {
         return new ToStringCreator(this)
 
-                .append("id", this.getId()).append("new", this.isNew())
-                .append("lastName", this.getLastName())
-                .append("firstName", this.getFirstName()).append("address", this.address)
-                .append("city", this.city).append("telephone", this.telephone).toString();
+            .append("id", this.getId()).append("new", this.isNew())
+            .append("lastName", this.getLastName())
+            .append("firstName", this.getFirstName()).append("address", this.address)
+            .append("city", this.city).append("telephone", this.telephone)
+            .append("age", this.age).toString();
     }
 }
